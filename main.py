@@ -27,7 +27,9 @@ def draw(player, elapsed_time, stars):
     WIN.blit(BG, (0, 0))
     time_text = FONT.render(f"Time: {round(elapsed_time)}s", 1, "white")
     WIN.blit(time_text, (10, 10))
-    WIN.blit(PLAYER_IMG, (player.x - 90, player.y - 150))
+    draw_x = player.centerx - (PLAYER_WIDTH / 2)
+    draw_y = player.botttom - PLAYER_HEIGHT
+    WIN.blit(PLAYER_IMG, (draw_x, draw_y))
     for star in stars:
         pygame.draw.rect(WIN, "pink", star)
     pygame.display.update()
@@ -47,8 +49,8 @@ async def main():
     start_time = time.time()
     elapsed_time = 0
 
-    hitbox_width = 120
-    hitbox_height = 160
+    hitbox_width = 80
+    hitbox_height = 100
 
     player = pygame.Rect(200, HEIGHT - hitbox_height - 55,
                          hitbox_width, hitbox_height)
