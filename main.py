@@ -17,7 +17,7 @@ PLAYER_VEL = 6
 STAR_WIDTH = 10
 STAR_HEIGHT = 20
 STAR_VEL = 2
-PLAYER_IMG_RAW = pygame.image.load("kid.png").convert_alpha()
+PLAYER_IMG_RAW = pygame.image.load("kid.png")
 PLAYER_IMG = pygame.transform.scale(
     PLAYER_IMG_RAW, (PLAYER_WIDTH, PLAYER_HEIGHT))
 FONT = pygame.font.SysFont("Arial", 30)
