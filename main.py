@@ -28,7 +28,8 @@ def draw(player, elapsed_time, stars):
     time_text = FONT.render(f"Time: {round(elapsed_time)}s", 1, "white")
     WIN.blit(time_text, (10, 10))
     draw_x = (player.centerx - (PLAYER_WIDTH / 2))
-    draw_y = (player.bottom - PLAYER_HEIGHT)
+    # Added + 110 to sink the image and compensate for the padding in kid.png
+    draw_y = (player.bottom - PLAYER_HEIGHT + 110)
     WIN.blit(PLAYER_IMG, (draw_x, draw_y))
     for star in stars:
         pygame.draw.rect(WIN, "pink", star)
@@ -49,8 +50,8 @@ async def main():
     start_time = time.time()
     elapsed_time = 0
 
-    hitbox_width = 120
-    hitbox_height = 280
+    hitbox_width = 100
+    hitbox_height = 100
     floor_y = HEIGHT
     player = pygame.Rect(200, floor_y - hitbox_height,
                          hitbox_width, hitbox_height)
