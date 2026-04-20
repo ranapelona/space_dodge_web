@@ -2,6 +2,7 @@ import asyncio
 import pygame
 import time
 import random
+pygame.init()
 pygame.font.init()
 pygame.mixer.init()
 
@@ -57,7 +58,6 @@ async def main():
     hit = False
     while run:
         await asyncio.sleep(0)
-        pygame.display.update()
         dt = clock.tick(60)
         star_count += dt
         elapsed_time = time.time() - start_time
