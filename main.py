@@ -49,8 +49,8 @@ async def main():
     start_time = time.time()
     elapsed_time = 0
 
-    hitbox_width = 80
-    hitbox_height = 100
+    hitbox_width = 60
+    hitbox_height = 80
 
     player = pygame.Rect(200, HEIGHT - hitbox_height - 55,
                          hitbox_width, hitbox_height)
