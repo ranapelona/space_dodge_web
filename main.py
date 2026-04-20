@@ -28,10 +28,12 @@ def draw(player, elapsed_time, stars):
     time_text = FONT.render(f"Time: {round(elapsed_time)}s", 1, "white")
     WIN.blit(time_text, (10, 10))
     draw_x = (player.centerx - (PLAYER_WIDTH / 2))
-    # Increased the offset to 160 to push the UFO lower.
-    # Increase this further if the character still looks like it's floating.
-    draw_y = (player.bottom - PLAYER_HEIGHT + 160)
+    # We are increasing this number to push the image DOWN.
+    # If it's still too high, increase 240 to 280. If it's too low, decrease it.
+    draw_y = (player.bottom - PLAYER_HEIGHT + 240)
     WIN.blit(PLAYER_IMG, (draw_x, draw_y))
+    # UNCOMMENT THE LINE BELOW TO SEE THE HITBOX FOR DEBUGGING
+    # pygame.draw.rect(WIN, (255, 0, 0), player, 2)
     for star in stars:
         pygame.draw.rect(WIN, "pink", star)
     pygame.display.update()
