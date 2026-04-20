@@ -17,7 +17,7 @@ PLAYER_VEL = 6
 STAR_WIDTH = 10
 STAR_HEIGHT = 20
 STAR_VEL = 2
-PLAYER_IMG_RAW = pygame.image.load("kid.png")
+PLAYER_IMG_RAW = pygame.image.load("kid.png").convert_alpha()
 PLAYER_IMG = pygame.transform.scale(
     PLAYER_IMG_RAW, (PLAYER_WIDTH, PLAYER_HEIGHT))
 FONT = pygame.font.SysFont("Arial", 30)
@@ -27,7 +27,7 @@ def draw(player, elapsed_time, stars):
     WIN.blit(BG, (0, 0))
     time_text = FONT.render(f"Time: {round(elapsed_time)}s", 1, "white")
     WIN.blit(time_text, (10, 10))
-    WIN.blit(PLAYER_IMG, (player.x, player.y))
+    WIN.blit(PLAYER_IMG, (player.x - 90, player.y - 150))
     for star in stars:
         pygame.draw.rect(WIN, "pink", star)
     pygame.display.update()
@@ -47,8 +47,8 @@ async def main():
     start_time = time.time()
     elapsed_time = 0
 
-    hitbox_width = 60
-    hitbox_height = 30
+    hitbox_width = 120
+    hitbox_height = 160
 
     player = pygame.Rect(200, HEIGHT - hitbox_height - 55,
                          hitbox_width, hitbox_height)
