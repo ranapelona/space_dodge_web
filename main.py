@@ -37,8 +37,9 @@ def draw(player, elapsed_time, stars):
     WIN.blit(time_text, (10, 10))
 
     draw_x = (player.centerx - (PLAYER_WIDTH / 2))
-    # Because we trimmed the image, the bottom of the image IS the bottom of the saucer
-    draw_y = (player.bottom - PLAYER_HEIGHT)
+    # We add +15 to 'sink' the image relative to the hitbox.
+    # This makes the saucer look grounded and moves the hitbox 'up' into the ship's body.
+    draw_y = (player.bottom - PLAYER_HEIGHT + 15)
     WIN.blit(PLAYER_IMG, (draw_x, draw_y))
 
     for star in stars:
@@ -63,8 +64,8 @@ async def main():
     # Create a hitbox that is a bit smaller than the actual sprite for fairer gameplay
     hitbox_width = int(PLAYER_WIDTH * 0.8)
     hitbox_height = int(PLAYER_HEIGHT * 0.6)
-    # Lift the floor up slightly so the saucer isn't clipping into the bottom edge
-    floor_y = HEIGHT - 20
+    # Set floor to HEIGHT to bring the character to the very bottom of the screen
+    floor_y = HEIGHT
     player = pygame.Rect(200, floor_y - hitbox_height,
                          hitbox_width, hitbox_height)
     star_add_increment = 2000
