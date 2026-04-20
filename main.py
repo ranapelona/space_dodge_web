@@ -11,15 +11,23 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.SCALED)
 pygame.display.set_caption("Space Dodge")
 
 BG = pygame.image.load("bg.jpg")
-PLAYER_WIDTH = 220
-PLAYER_HEIGHT = 220
+
+PLAYER_IMG_RAW = pygame.image.load("kid.png").convert_alpha()
+# Find the actual non-transparent area of the image and crop it
+content_rect = PLAYER_IMG_RAW.get_bounding_rect()
+PLAYER_IMG_TRIMMED = PLAYER_IMG_RAW.subsurface(content_rect)
+
+# Set the desired visual width and calculate height to maintain aspect ratio
+PLAYER_WIDTH = 200
+PLAYER_HEIGHT = int(PLAYER_WIDTH * (content_rect.height / content_rect.width))
+PLAYER_IMG = pygame.transform.scale(
+    PLAYER_IMG_TRIMMED, (PLAYER_WIDTH, PLAYER_HEIGHT))
+
 PLAYER_VEL = 6
 STAR_WIDTH = 10
 STAR_HEIGHT = 20
 STAR_VEL = 2
-PLAYER_IMG_RAW = pygame.image.load("kid.png").convert_alpha()
-PLAYER_IMG = pygame.transform.scale(
-    PLAYER_IMG_RAW, (PLAYER_WIDTH, PLAYER_HEIGHT))
+
 FONT = pygame.font.SysFont("Arial", 30)
 
 
@@ -29,10 +37,8 @@ def draw(player, elapsed_time, stars):
     WIN.blit(time_text, (10, 10))
 
     draw_x = (player.centerx - (PLAYER_WIDTH / 2))
-    # We use +20 to sink the transparent bottom of kid.png slightly into the floor.
-    # This makes the saucer look grounded without disappearing off-screen.
-    # If he's still floating, increase this to +30.
-    draw_y = (player.bottom - PLAYER_HEIGHT + 25)
+    # Because we trimmed the image, the bottom of the image IS the bottom of the saucer
+    draw_y = (player.bottom - PLAYER_HEIGHT)
     WIN.blit(PLAYER_IMG, (draw_x, draw_y))
     # This draws a red box. Use this to align your UFO to the "floor"
     pygame.draw.rect(WIN, (255, 0, 0), player, 2)
@@ -56,8 +62,9 @@ async def main():
     start_time = time.time()
     elapsed_time = 0
 
-    hitbox_width = 80
-    hitbox_height = 40
+    # Create a hitbox that is a bit smaller than the actual sprite for fairer gameplay
+    hitbox_width = int(PLAYER_WIDTH * 0.8)
+    hitbox_height = int(PLAYER_HEIGHT * 0.6)
     # Setting floor to HEIGHT (600) to put him at the very bottom
     floor_y = HEIGHT
     player = pygame.Rect(200, floor_y - hitbox_height,
