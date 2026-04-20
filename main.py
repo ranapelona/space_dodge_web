@@ -28,9 +28,10 @@ def draw(player, elapsed_time, stars):
     time_text = FONT.render(f"Time: {round(elapsed_time)}s", 1, "white")
     WIN.blit(time_text, (10, 10))
     draw_x = (player.centerx - (PLAYER_WIDTH / 2))
-    # We are increasing this number to push the image DOWN.
-    # If it's still too high, increase 240 to 280. If it's too low, decrease it.
-    draw_y = (player.bottom - PLAYER_HEIGHT + 240)
+    # 240 was too much! Let's try 30.
+    # If it's still floating, try 40 or 50.
+    # If the bottom is cut off, try 10 or 20.
+    draw_y = (player.bottom - PLAYER_HEIGHT + 30)
     WIN.blit(PLAYER_IMG, (draw_x, draw_y))
     # UNCOMMENT THE LINE BELOW TO SEE THE HITBOX FOR DEBUGGING
     # pygame.draw.rect(WIN, (255, 0, 0), player, 2)
