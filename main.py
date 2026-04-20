@@ -11,8 +11,8 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.SCALED)
 pygame.display.set_caption("Space Dodge")
 
 BG = pygame.image.load("bg.jpg")
-PLAYER_WIDTH = 160
-PLAYER_HEIGHT = 160
+PLAYER_WIDTH = 140
+PLAYER_HEIGHT = 140
 PLAYER_VEL = 6
 STAR_WIDTH = 10
 STAR_HEIGHT = 20
@@ -29,7 +29,8 @@ def draw(player, elapsed_time, stars):
     WIN.blit(time_text, (10, 10))
 
     draw_x = (player.centerx - (PLAYER_WIDTH / 2))
-    draw_y = (player.bottom - PLAYER_HEIGHT)
+    # Adding +20 here to make sure the UFO ship sits inside the red hitbox
+    draw_y = (player.bottom - PLAYER_HEIGHT + 20)
     WIN.blit(PLAYER_IMG, (draw_x, draw_y))
     # This draws a red box. Use this to align your UFO to the "floor"
     pygame.draw.rect(WIN, (255, 0, 0), player, 2)
@@ -55,7 +56,8 @@ async def main():
 
     hitbox_width = 80
     hitbox_height = 40
-    floor_y = HEIGHT
+    # We moved the floor up by 50 pixels so it's definitely on your screen
+    floor_y = HEIGHT - 50
     player = pygame.Rect(200, floor_y - hitbox_height,
                          hitbox_width, hitbox_height)
     star_add_increment = 2000
