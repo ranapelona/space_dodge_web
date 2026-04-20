@@ -28,8 +28,9 @@ def draw(player, elapsed_time, stars):
     time_text = FONT.render(f"Time: {round(elapsed_time)}s", 1, "white")
     WIN.blit(time_text, (10, 10))
     draw_x = (player.centerx - (PLAYER_WIDTH / 2))
-    # Added + 110 to sink the image and compensate for the padding in kid.png
-    draw_y = (player.bottom - PLAYER_HEIGHT + 110)
+    # Increased the offset to 160 to push the UFO lower.
+    # Increase this further if the character still looks like it's floating.
+    draw_y = (player.bottom - PLAYER_HEIGHT + 160)
     WIN.blit(PLAYER_IMG, (draw_x, draw_y))
     for star in stars:
         pygame.draw.rect(WIN, "pink", star)
@@ -51,7 +52,7 @@ async def main():
     elapsed_time = 0
 
     hitbox_width = 100
-    hitbox_height = 100
+    hitbox_height = 80
     floor_y = HEIGHT
     player = pygame.Rect(200, floor_y - hitbox_height,
                          hitbox_width, hitbox_height)
