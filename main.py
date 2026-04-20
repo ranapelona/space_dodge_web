@@ -40,8 +40,6 @@ def draw(player, elapsed_time, stars):
     # Because we trimmed the image, the bottom of the image IS the bottom of the saucer
     draw_y = (player.bottom - PLAYER_HEIGHT)
     WIN.blit(PLAYER_IMG, (draw_x, draw_y))
-    # This draws a red box. Use this to align your UFO to the "floor"
-    pygame.draw.rect(WIN, (255, 0, 0), player, 2)
 
     for star in stars:
         pygame.draw.rect(WIN, "pink", star)
@@ -65,8 +63,8 @@ async def main():
     # Create a hitbox that is a bit smaller than the actual sprite for fairer gameplay
     hitbox_width = int(PLAYER_WIDTH * 0.8)
     hitbox_height = int(PLAYER_HEIGHT * 0.6)
-    # Setting floor to HEIGHT (600) to put him at the very bottom
-    floor_y = HEIGHT
+    # Lift the floor up slightly so the saucer isn't clipping into the bottom edge
+    floor_y = HEIGHT - 20
     player = pygame.Rect(200, floor_y - hitbox_height,
                          hitbox_width, hitbox_height)
     star_add_increment = 2000
