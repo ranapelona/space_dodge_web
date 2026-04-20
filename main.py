@@ -52,7 +52,7 @@ async def main():
     hitbox_width = 80
     hitbox_height = 80
 
-    player = pygame.Rect(200, HEIGHT - hitbox_height - 55,
+    player = pygame.Rect(200, HEIGHT - hitbox_height - 10,
                          hitbox_width, hitbox_height)
     star_add_increment = 2000
     star_count = 0
