@@ -28,7 +28,7 @@ def draw(player, elapsed_time, stars):
     time_text = FONT.render(f"Time: {round(elapsed_time)}s", 1, "white")
     WIN.blit(time_text, (10, 10))
     draw_x = (player.centerx - (PLAYER_WIDTH / 2))
-    draw_y = (player.bottom - PLAYER_HEIGHT)
+    draw_y = (player.bottom - PLAYER_HEIGHT) + 10
     WIN.blit(PLAYER_IMG, (draw_x, draw_y))
     for star in stars:
         pygame.draw.rect(WIN, "pink", star)
