@@ -115,4 +115,4 @@ async def main():
         draw(player, elapsed_time, stars)
     pygame.quit()
 
-    asyncio.run(main())
+asyncio.run(main())
